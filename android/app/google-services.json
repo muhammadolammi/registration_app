@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "669476416798",
+    "project_id": "akek-register-screen",
+    "storage_bucket": "akek-register-screen.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:669476416798:android:bbcfa366dcad4675826d0f",
+        "android_client_info": {
+          "package_name": "wixforum.com.registration_screen"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "669476416798-cevtodhrvtavqjkf4u83r5ljkt0foule.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0v58oRUbrrlMQQDufU2k-z_jRn2QrG9k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "669476416798-cevtodhrvtavqjkf4u83r5ljkt0foule.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
