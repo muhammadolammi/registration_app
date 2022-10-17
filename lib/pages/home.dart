@@ -4,6 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:registration_screen/pages/loading_page.dart';
+import 'package:registration_screen/pages/login.dart';
+import 'package:registration_screen/pages/verifyemailview.dart';
 
 import '../firebase_options.dart';
 
@@ -30,12 +32,12 @@ class _HomeState extends State<Home> {
           switch (snapshot.connectionState) {
             case ConnectionState.done:
               final user = FirebaseAuth.instance.currentUser;
-              if (user?.emailVerified ?? false) {
-                print('Email Verified');
-              } else {
-                print('Verify Your Email');
-              }
-              return Text('done');
+              //if (user?.emailVerified ?? false) {
+              // print('Email Verified');
+              //} else {
+              //  return VerifyEmailview();
+              // }
+              return Login();
 
             default:
               return LoadingPage();

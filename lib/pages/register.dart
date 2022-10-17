@@ -176,42 +176,6 @@ class _RegisterState extends State<Register> {
                                               fontWeight: FontWeight.bold),
                                         )),
                                   )),
-                              TextButton(
-                                  onPressed: () async {
-                                    try {
-                                      final email = _email.text;
-                                      final password = _password.text;
-                                      Navigator.pushNamed(
-                                        context,
-                                        '/login',
-                                      );
-                                    } catch (err) {
-                                      print('An Error Occured');
-                                      print(err);
-                                    }
-                                  },
-                                  child: Container(
-                                    width: 250,
-                                    alignment: Alignment.center,
-                                    decoration: BoxDecoration(
-                                        gradient: LinearGradient(
-                                            begin: Alignment.centerLeft,
-                                            end: Alignment.centerRight,
-                                            colors: [
-                                          Color(0xff8a2387),
-                                          Color(0xff8a94057),
-                                          Color(0xff8a27121)
-                                        ])),
-                                    child: Padding(
-                                        padding: EdgeInsets.all(12),
-                                        child: Text(
-                                          'Login',
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.bold),
-                                        )),
-                                  ))
                             ]),
                       ),
                     ],
