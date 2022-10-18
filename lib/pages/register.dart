@@ -72,8 +72,8 @@ class _RegisterState extends State<Register> {
                         height: 30,
                       ),
                       Container(
-                        height: 500,
-                        width: 325,
+                        height: 400,
+                        width: 350,
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(10),
@@ -135,7 +135,20 @@ class _RegisterState extends State<Register> {
                                             color: Colors.orangeAccent[700]),
                                       ),
                                     ),
-                                  )
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.all(20),
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        Navigator.pushNamed(context, '/login');
+                                      },
+                                      child: Text(
+                                        'Already a user? Sign In',
+                                        style: TextStyle(
+                                            color: Colors.orangeAccent[700]),
+                                      ),
+                                    ),
+                                  ),
                                 ],
                               ),
                               TextButton(
@@ -147,6 +160,8 @@ class _RegisterState extends State<Register> {
                                           .instance
                                           .createUserWithEmailAndPassword(
                                               email: email, password: password);
+                                      Navigator.pushNamedAndRemoveUntil(
+                                          context, '/home', (route) => false);
 
                                       print(UserCredential);
                                     } catch (err) {

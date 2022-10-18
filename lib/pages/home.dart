@@ -5,6 +5,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:registration_screen/pages/loading_page.dart';
 import 'package:registration_screen/pages/login.dart';
+import 'package:registration_screen/pages/noteview.dart';
 import 'package:registration_screen/pages/verifyemailview.dart';
 
 import '../firebase_options.dart';
@@ -19,37 +20,29 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Home'),
-        centerTitle: true,
+    return FutureBuilder(
+      future: Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform,
       ),
-      body: FutureBuilder(
-        future: Firebase.initializeApp(
-          options: DefaultFirebaseOptions.currentPlatform,
-        ),
-        builder: (context, snapshot) {
-          switch (snapshot.connectionState) {
-            case ConnectionState.done:
-              final user = FirebaseAuth.instance.currentUser;
+      builder: (context, snapshot) {
+        switch (snapshot.connectionState) {
+          case ConnectionState.done:
+            final user = FirebaseAuth.instance.currentUser;
 
-              if (user != null) {
-                if (user?.emailVerified ?? false) {
-                  print('Email Verified');
-                } else {
-                  return VerifyEmailview();
-                }
+            if (user != null) {
+              if (user?.emailVerified ?? false) {
+                return NoteView();
               } else {
-                return Login();
+                return VerifyEmailview();
               }
-              ;
-              return Text('Done');
+            } else {
+              return Login();
+            }
 
-            default:
-              return LoadingPage();
-          }
-        },
-      ),
+          default:
+            return LoadingPage();
+        }
+      },
     );
   }
 }
