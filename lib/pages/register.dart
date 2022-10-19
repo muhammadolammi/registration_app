@@ -1,8 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:registration_screen/constants/routes.dart';
 import 'package:registration_screen/pages/loading_page.dart';
 
 import '../firebase_options.dart';
@@ -72,8 +75,8 @@ class _RegisterState extends State<Register> {
                         height: 30,
                       ),
                       Container(
-                        height: 400,
-                        width: 350,
+                        height: 500,
+                        width: MediaQuery.of(context).size.width * 0.92,
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(10),
@@ -140,7 +143,8 @@ class _RegisterState extends State<Register> {
                                     padding: EdgeInsets.all(20),
                                     child: GestureDetector(
                                       onTap: () {
-                                        Navigator.pushNamed(context, '/login');
+                                        Navigator.pushNamed(
+                                            context, loginRoute);
                                       },
                                       child: Text(
                                         'Already a user? Sign In',
@@ -161,7 +165,7 @@ class _RegisterState extends State<Register> {
                                           .createUserWithEmailAndPassword(
                                               email: email, password: password);
                                       Navigator.pushNamedAndRemoveUntil(
-                                          context, '/home', (route) => false);
+                                          context, homeRoute, (route) => false);
 
                                       print(UserCredential);
                                     } catch (err) {

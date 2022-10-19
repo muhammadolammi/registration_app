@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:registration_screen/constants/routes.dart';
 
 import '../firebase_options.dart';
 
@@ -61,7 +62,7 @@ class _VerifyEmailviewState extends State<VerifyEmailview> {
                 ),
                 onPressed: () {
                   Navigator.pushNamedAndRemoveUntil(
-                      context, '/login', (route) => false);
+                      context, loginRoute, (route) => false);
                 },
                 child: Text(
                   'Back To Login',

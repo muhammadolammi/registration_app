@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:registration_screen/constants/routes.dart';
 import 'package:registration_screen/pages/home.dart';
 import 'package:registration_screen/pages/loading_page.dart';
 import 'package:registration_screen/pages/login.dart';
@@ -18,10 +19,10 @@ void main() {
     debugShowCheckedModeBanner: false,
     initialRoute: '/home',
     routes: {
-      '/login': (context) => Login(),
-      '/home': (context) => Home(),
-      '/verify_email': (context) => VerifyEmailview(),
-      '/register': (context) => Register(),
+      loginRoute: (context) => Login(),
+      homeRoute: (context) => Home(),
+      verify_emailRoute: (context) => VerifyEmailview(),
+      registerRoute: (context) => Register(),
     },
   ));
 }

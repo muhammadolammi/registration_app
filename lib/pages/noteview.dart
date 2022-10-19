@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'dart:developer' as devtools show log;
+import 'package:registration_screen/constants/routes.dart';
+import 'package:registration_screen/alertdiaogs.dart';
 
 class NoteView extends StatefulWidget {
   const NoteView({super.key});
@@ -24,7 +26,7 @@ class _NoteViewState extends State<NoteView> {
                 if (shouldLogout) {
                   await FirebaseAuth.instance.signOut();
                   Navigator.pushNamedAndRemoveUntil(
-                      context, '/login', (route) => false);
+                      context, loginRoute, (route) => false);
                 }
 
                 break;
@@ -42,28 +44,3 @@ class _NoteViewState extends State<NoteView> {
 }
 
 enum MenuAction { logout }
-
-Future<bool> showLogOutDialog(BuildContext context) {
-  return showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: Text('Sign Out'),
-          content: Text('Are you sure you want to sign out?'),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop(false);
-              },
-              child: Text('Cancel'),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop(true);
-              },
-              child: Text('Sign Out'),
-            ),
-          ],
-        );
-      }).then((value) => (value ?? false));
-}

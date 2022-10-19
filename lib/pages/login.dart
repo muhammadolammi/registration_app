@@ -3,9 +3,11 @@ import 'package:flutter/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:registration_screen/constants/routes.dart';
 import 'package:registration_screen/pages/loading_page.dart';
 import 'package:registration_screen/main.dart';
 import 'dart:developer' as devtools show log;
+import 'package:registration_screen/alertdiaogs.dart';
 
 import '../firebase_options.dart';
 
@@ -68,8 +70,8 @@ class _LoginState extends State<Login> {
                         height: 30,
                       ),
                       Container(
-                        height: 400,
-                        width: 350,
+                        height: 500,
+                        width: MediaQuery.of(context).size.width * 0.92,
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(10),
@@ -137,7 +139,7 @@ class _LoginState extends State<Login> {
                                     child: GestureDetector(
                                       onTap: () {
                                         Navigator.pushNamed(
-                                            context, '/register');
+                                            context, registerRoute);
                                       },
                                       child: Text(
                                         'Not a user? Register Now!',
@@ -158,10 +160,29 @@ class _LoginState extends State<Login> {
                                           .signInWithEmailAndPassword(
                                               email: email, password: password);
                                       Navigator.pushNamedAndRemoveUntil(
-                                          context, '/home', (route) => false);
+                                          context, homeRoute, (route) => false);
 
                                       print(UserCredential);
+                                    } on FirebaseAuthException catch (err) {
+                                      if (err.code == 'user-not-found') {
+                                        return showErrorDialog(
+                                            context, 'User Not Found');
+                                      } else if (err.code == 'wrong-password') {
+                                        return showErrorDialog(
+                                            context, 'Wrong Password');
+                                      } else if (err.code ==
+                                          'network-request-failed') {
+                                        return showErrorDialog(
+                                            context, 'Connect to the Internet');
+                                      } else if (err.code == 'user-disabled') {
+                                        return showErrorDialog(context,
+                                            'Your account was Disabled');
+                                      } else {
+                                        showErrorDialog(context, '${err.code}');
+                                      }
                                     } catch (err) {
+                                      return showErrorDialog(
+                                          context, err.toString());
                                       devtools.log('An Error Occured');
                                       devtools.log(err.toString());
                                     }
